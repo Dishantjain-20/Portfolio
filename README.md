@@ -237,3 +237,57 @@ lightbox caption and screen readers still work.
 Each is one commit, recoverable with `git revert <commit>`: midnight blue on
 buttermilk (current), buttermilk on midnight blue, green-black and pista,
 off-white and pista, and black and gold before those.
+
+## Photo curation (round 5)
+
+Every wall was rebuilt from the eight zips: 162 images and 12 video files went
+in, 46 photos and 8 short clips came out. Each picture appears once across the
+whole page (checked by source file, not just by caption).
+
+**Your numbered files are the main images.** `01`, `02`, `03` lead their wall in
+that order, as larger cards: Brand (Suhana, Motoranger, NH7), Corporate (company
+visit, exhibition walk-through, banquet build), and the wedding `01.mp4` reel.
+The three numbered "Dishant photos" are the Skills row, in order.
+
+**What was left out, and why**
+
+- **51 hex-named wedding files** (`0d53205490d3….jpg`). That is the filename
+  Pinterest gives downloaded images. None carries camera data, and several show
+  other photographers' credits or watermarks ("Photo Courtesy: Destination
+  Photographers", "PixelStory.in", "The Wedding Salad"). They are not your work.
+- **6 more saved images** with no camera data: five `IMG_20261013_*` (saved on
+  13 Oct 2026, long after any event they could depict) and `IMG_20230217_000233`.
+- **3 screenshots** (two in Wedding 2, one Tri Mandir; the Tri Mandir one is
+  already cropped into the existing aerial).
+- Burst near-duplicates: the second of each pair taken seconds apart, plus the
+  Under25 tab's "at REVA" photo, which was the same shot as the Fastrack cards.
+- The second copy of `downloadmedia-20261015.mp4` (it sat, byte-identical, in
+  both Live events and Tri Mandir; it is used once, under Tri Mandir).
+
+Everything shipped has OnePlus, Huawei, Sony or Canon metadata, with four
+exceptions: the Dishant photos `01` and `02` (photos *of* you, taken by someone
+else), the 1920x1080 company-visit image `01`, and one NH7 2019 shot
+(`PSX_20191202_174300`) that went through Photoshop Express, which strips
+metadata. The rest of that NH7 batch carries Huawei data, so it is yours.
+
+**Worth confirming**
+
+- The Tri Mandir clip and the wedding reels share one "Ty" monogram in the
+  corner, so they came from one editor or team. The Tri Mandir file is named
+  `downloadmedia-20261015` (downloaded, not shot on your phone). Make sure you
+  are free to use that footage.
+- The hero is now cut from the 4576px original rather than the old 1000px copy.
+
+### Formats
+
+Photos are JPEG at 900px on the long edge (1200px for mains, 2200px for the
+hero); this Mac can read WebP but not write it. Videos are muted H.264, 7 to 10
+seconds, 0.5 to 1.1 MB each, cut from clips that were up to 288 MB. The 90
+second Tri Mandir clip was stored sideways and is rotated upright. Posters are
+real frames from inside each clip, not the first frame (often a title card).
+
+### Walls
+
+The walls no longer loop, so each row scrolls once and lines up with the page's
+content column. Captions are off the wall cards; each image keeps descriptive
+`alt` text, which is also the lightbox caption.
