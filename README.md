@@ -159,3 +159,48 @@ the JSON-LD as `alumniOf` and `knowsLanguage`. No degree name is claimed for
 the 2018–2021 course, since the resume does not state one — only the years
 and the marks. Your home address is on the resume and deliberately stays off
 a public page.
+
+## Round 4
+
+- Removed the "The brief" block from the Tri Mandir case study; it now runs
+  constraint / what I did / outcome in three columns.
+- Removed the Summit at Campus and Under25 IRL explainer cards. The bar
+  labels still read "Summit at Campus" and "Under25 IRL".
+
+## Pushing to GitHub
+
+This folder is a git repo with `origin` set to
+`https://github.com/Dishantjain-20/Portfolio.git` and commits on `main`.
+Nothing has been pushed — this machine has no GitHub credentials (no `gh`,
+no SSH key, no credential helper).
+
+Authenticate once, then push:
+
+```bash
+brew install gh && gh auth login
+cd ~/Downloads/dishant-jain-portfolio && git push -u origin main
+```
+
+The remote already has your earlier upload, so the first push will be
+rejected as a non-fast-forward. Check what is there before deciding:
+
+```bash
+git fetch origin && git log --oneline origin/main
+```
+
+If that is the old single-file version and you do not want it, replace it
+with `git push -u --force origin main`. If you want to keep it, say so and
+the two histories can be merged instead.
+
+Commits here are authored as `Dishant Jain <djain200820@gmail.com>`. If your
+GitHub account uses a different address, the commits will not link to your
+profile — change it with
+`git config user.email "your@address"`.
+
+### "Automatically"
+
+Git does not sync on its own. Every change needs a commit and a push, which
+I can run on request. If you want the site to rebuild and go live by itself
+whenever the repo changes, that is GitHub Pages: repo Settings → Pages →
+deploy from `main` / root. Then each push updates the live site, and the only
+manual step left is the push itself.
