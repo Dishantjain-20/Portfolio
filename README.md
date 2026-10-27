@@ -204,3 +204,38 @@ I can run on request. If you want the site to rebuild and go live by itself
 whenever the repo changes, that is GitHub Pages: repo Settings → Pages →
 deploy from `main` / root. Then each push updates the live site, and the only
 manual step left is the push itself.
+
+## Palette
+
+Off-white ground with pista green, replacing the black-and-gold.
+
+| Token | Value | Role |
+|---|---|---|
+| `--bg` | `#F3F1E9` | warm off-white page |
+| `--fg` | `#1C2B20` | near-black green ink |
+| `--acc` | `#2F6B46` | deep leaf green — anything carrying text |
+| `--pista` | `#C7DFAE` | fills only: active pills, city chips |
+| `--pista-ink` | `#1F3326` | text sitting on pista |
+
+Two greens rather than one because pista on off-white is about 1.8:1 — far
+below the 4.5:1 needed for text. It works as a fill; the deeper green does
+the typographic work at 5.6:1. Every text style on the page was measured
+against the real background after the change: lowest is 4.95:1, nothing
+fails AA.
+
+### Logos
+
+Six marks (Shein, Sunburn, Samsung, Perfora, Fastrack, Under25) are white
+knockouts and disappear on a pale page. They carry an `inv` class and are
+inverted to black; the rest render greyscale and go full colour on hover.
+Greyscale rather than a flat silhouette, because `brightness(0)` collapsed
+the detailed logos (Eco-Factory, Bingo, NH7) into unreadable blobs.
+
+### Going back to black and gold
+
+The gold version is the commit before the repaint:
+
+```bash
+git log --oneline          # find "Repaint the site light"
+git revert <that-commit>   # keeps history
+```
