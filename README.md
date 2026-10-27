@@ -207,35 +207,38 @@ manual step left is the push itself.
 
 ## Palette
 
-Off-white ground with pista green, replacing the black-and-gold.
+Green-black ground with pista green.
 
 | Token | Value | Role |
 |---|---|---|
-| `--bg` | `#F3F1E9` | warm off-white page |
-| `--fg` | `#1C2B20` | near-black green ink |
-| `--acc` | `#2F6B46` | deep leaf green — anything carrying text |
-| `--pista` | `#C7DFAE` | fills only: active pills, city chips |
-| `--pista-ink` | `#1F3326` | text sitting on pista |
+| `--bg` | `#0E1511` | near-black, quietly green |
+| `--fg` | `#ECF0E8` | bone text |
+| `--acc` / `--pista` | `#B5D99C` | pista — carries text and fills |
+| `--pista-ink` | `#0E1511` | text sitting on a pista fill |
+| `--card` | `#151E18` | cards, tiles, chips |
 
-Two greens rather than one because pista on off-white is about 1.8:1 — far
-below the 4.5:1 needed for text. It works as a fill; the deeper green does
-the typographic work at 5.6:1. Every text style on the page was measured
-against the real background after the change: lowest is 4.95:1, nothing
-fails AA.
+On a dark ground pista clears 11.8:1, so unlike the light version it can
+carry text directly and `--acc` and `--pista` are the same colour. Lowest
+measured text contrast on the page is 6.68:1.
 
 ### Logos
 
-Six marks (Shein, Sunburn, Samsung, Perfora, Fastrack, Under25) are white
-knockouts and disappear on a pale page. They carry an `inv` class and are
-inverted to black; the rest render greyscale and go full colour on hover.
-Greyscale rather than a flat silhouette, because `brightness(0)` collapsed
-the detailed logos (Eco-Factory, Bingo, NH7) into unreadable blobs.
+The knockout mapping flips with the ground. Here the default is
+`grayscale(1) invert(1)`, which lifts dark and colour marks to light while
+keeping their internal detail; the six marks tagged `inv` (Shein, Sunburn,
+Samsung, Perfora, Fastrack, Under25) are already white and only get
+greyscaled. Hover brightens rather than restoring true colour, because the
+dark logos would vanish against the page.
 
-### Going back to black and gold
+### Other themes tried
 
-The gold version is the commit before the repaint:
+Three palettes are in the history, each one commit:
 
 ```bash
-git log --oneline          # find "Repaint the site light"
-git revert <that-commit>   # keeps history
+git log --oneline
+#  ... Repaint the site dark: green-black ground, pista green   <- current
+#  ... Repaint the site light: off-white ground, pista green
+#  ... (everything before that is black and gold)
 ```
+
+`git revert <commit>` steps back to any of them without losing work.
