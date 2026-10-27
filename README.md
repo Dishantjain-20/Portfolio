@@ -207,38 +207,33 @@ manual step left is the push itself.
 
 ## Palette
 
-Midnight blue ground with buttermilk.
+Buttermilk ground with midnight blue.
 
 | Token | Value | Role |
 |---|---|---|
-| `--bg` | `#0F3C65` | midnight blue page |
-| `--fg` | `#EDE4C4` | softened buttermilk — body text |
-| `--acc` / `--fill` | `#FFF2BA` | buttermilk — headings, numbers, fills |
-| `--fill-ink` | `#0F3C65` | text on a buttermilk fill |
-| `--card` | `#12456F` | cards, tiles, chips |
+| `--bg` | `#FFF2BA` | buttermilk page |
+| `--fg` | `#1B4E7D` | lifted navy — body text |
+| `--acc` / `--fill` | `#0F3C65` | midnight blue — headings, figures, fills |
+| `--fill-ink` | `#FFF2BA` | buttermilk text on a navy fill |
+| `--card` | `#FFF8D8` | cards, tiles, chips |
 
-Body text is a slightly muted buttermilk rather than the full `#FFF2BA`.
-In a strict two-colour palette there is otherwise no way to separate an
-accent from body copy, and full-strength buttermilk across long paragraphs
-glares. Lowest measured text contrast is 5.39:1; headings sit at 10.06:1.
+Body copy sits a shade lighter than the full `#0F3C65`, so the accent still
+reads as emphasis in a two-colour system. Fills invert the pair: navy block,
+buttermilk text. Lowest measured text contrast is 5.29:1, headings 10.06:1.
+
+The hero portrait caption is pinned to light values rather than tokens,
+because it sits on the photo gradient rather than on the page and would
+otherwise turn navy-on-dark when the palette points this way.
 
 ### Photo wall
 
-Each picture now appears once. The wall used to loop by cloning its row
-until it filled the viewport, which is why the same photos kept coming
-round. It is a plain horizontal scroll with snap points instead — swipe on
-a phone, trackpad or shift-scroll on a desktop. Captions are gone from the
-wall cards; `alt` text stays on every image, so screen readers and the
-lightbox caption are unaffected.
+Each picture appears once. The wall used to loop by cloning its row until it
+filled the viewport, which is what made photos repeat; it is a snap-scrolling
+row now. Captions are off the wall cards; `alt` text is untouched, so the
+lightbox caption and screen readers still work.
 
 ### Earlier palettes
 
-Each is one commit, recoverable with `git revert <commit>`:
-
-```bash
-git log --oneline
-#  ... midnight blue and buttermilk   <- current
-#  ... green-black and pista
-#  ... off-white and pista
-#  ... (before that, black and gold)
-```
+Each is one commit, recoverable with `git revert <commit>`: midnight blue on
+buttermilk (current), buttermilk on midnight blue, green-black and pista,
+off-white and pista, and black and gold before those.
