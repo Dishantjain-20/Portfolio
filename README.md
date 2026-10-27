@@ -207,38 +207,38 @@ manual step left is the push itself.
 
 ## Palette
 
-Green-black ground with pista green.
+Midnight blue ground with buttermilk.
 
 | Token | Value | Role |
 |---|---|---|
-| `--bg` | `#0E1511` | near-black, quietly green |
-| `--fg` | `#ECF0E8` | bone text |
-| `--acc` / `--pista` | `#B5D99C` | pista — carries text and fills |
-| `--pista-ink` | `#0E1511` | text sitting on a pista fill |
-| `--card` | `#151E18` | cards, tiles, chips |
+| `--bg` | `#0F3C65` | midnight blue page |
+| `--fg` | `#EDE4C4` | softened buttermilk — body text |
+| `--acc` / `--fill` | `#FFF2BA` | buttermilk — headings, numbers, fills |
+| `--fill-ink` | `#0F3C65` | text on a buttermilk fill |
+| `--card` | `#12456F` | cards, tiles, chips |
 
-On a dark ground pista clears 11.8:1, so unlike the light version it can
-carry text directly and `--acc` and `--pista` are the same colour. Lowest
-measured text contrast on the page is 6.68:1.
+Body text is a slightly muted buttermilk rather than the full `#FFF2BA`.
+In a strict two-colour palette there is otherwise no way to separate an
+accent from body copy, and full-strength buttermilk across long paragraphs
+glares. Lowest measured text contrast is 5.39:1; headings sit at 10.06:1.
 
-### Logos
+### Photo wall
 
-The knockout mapping flips with the ground. Here the default is
-`grayscale(1) invert(1)`, which lifts dark and colour marks to light while
-keeping their internal detail; the six marks tagged `inv` (Shein, Sunburn,
-Samsung, Perfora, Fastrack, Under25) are already white and only get
-greyscaled. Hover brightens rather than restoring true colour, because the
-dark logos would vanish against the page.
+Each picture now appears once. The wall used to loop by cloning its row
+until it filled the viewport, which is why the same photos kept coming
+round. It is a plain horizontal scroll with snap points instead — swipe on
+a phone, trackpad or shift-scroll on a desktop. Captions are gone from the
+wall cards; `alt` text stays on every image, so screen readers and the
+lightbox caption are unaffected.
 
-### Other themes tried
+### Earlier palettes
 
-Three palettes are in the history, each one commit:
+Each is one commit, recoverable with `git revert <commit>`:
 
 ```bash
 git log --oneline
-#  ... Repaint the site dark: green-black ground, pista green   <- current
-#  ... Repaint the site light: off-white ground, pista green
-#  ... (everything before that is black and gold)
+#  ... midnight blue and buttermilk   <- current
+#  ... green-black and pista
+#  ... off-white and pista
+#  ... (before that, black and gold)
 ```
-
-`git revert <commit>` steps back to any of them without losing work.
