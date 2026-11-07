@@ -317,3 +317,9 @@ The introduction is a split hero: name, role, intro and two buttons in one left-
 - Logos keep their own colours. The ones that are white-only artwork (Shein, Samsung, Sunburn, Fastrack, Perfora, Under25, Spade) sit on a coloured card; the card colour is the `--cb` variable on each `.fl`. Those card colours are decorative picks, not official brand specs, so change them freely.
 - On desktop the whole ring drifts slightly with the mouse. Under `prefers-reduced-motion` the cards are placed once and do not move; the animation also pauses when the hero is off-screen or the tab is hidden.
 - The scrolling "Brands I've worked with" strip was removed; the full logo wall is still under Work → Brands.
+
+## Photo wall coverflow (round 8)
+
+Each photo wall row keeps its plain scroll-snap markup; a small script at the end of `index.html` adds the coverflow look. The card nearest the middle of the row is large and sharp, cards either side shrink, angle away and fade, and the row snaps with a card centred. Mouse users get arrow buttons on row hover; touch users swipe. With `prefers-reduced-motion` the script does nothing and the rows stay as flat strips.
+
+Tuning lives in the `apply()` function: `26` is the side angle in degrees, `.24` the side shrink, `.55` the side fade, `1.05` the centre card's zoom.

@@ -220,7 +220,16 @@ body{overflow-x:hidden}
 .pc img,.pc video{display:block;height:var(--h);width:auto;vertical-align:bottom;background:#15171C}
 .pc video{cursor:default}
 .pc:hover{transform:translateY(-6px);border-color:rgba(255,90,43,.55);box-shadow:0 22px 44px rgba(0,0,0,.55)}
-@media(max-width:700px){.pc{--h:210px}.pc.big{--h:250px}.set{gap:10px;padding-right:10px}.pr{padding:26px 0 20px}}
+.prw{position:relative}
+.pr.cf{scroll-snap-type:x proximity;scroll-padding-inline:0;padding:32px 0 28px}
+.pr.cf .pc{scroll-snap-align:center;will-change:transform;transform-origin:50% 50%;transition:border-color .45s,box-shadow .45s}
+.pr.cf .pc:hover{transform:none}
+.cfb{position:absolute;top:50%;z-index:200;width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1px solid var(--line);background:rgba(21,23,28,.88);color:var(--fg);font:400 18px/1 Inter,sans-serif;cursor:pointer;opacity:0;transition:opacity .3s,border-color .3s,background .3s}
+.cfb.l{left:max(12px,calc(50vw - 560px))}.cfb.r{right:max(12px,calc(50vw - 560px))}
+.prw:hover .cfb,.cfb:focus-visible{opacity:1}
+.cfb:hover{border-color:var(--acc);background:#15171C}
+@media(hover:none){.cfb{display:none}}
+@media(max-width:700px){.pr.cf{padding:30px 0 24px}.pc{--h:210px}.pc.big{--h:250px}.set{gap:10px;padding-right:10px}.pr{padding:26px 0 20px}}
 .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 20px) 14px calc(env(safe-area-inset-bottom,0px) + 20px)}
 .lb.open{display:flex;animation:in .3s ease}
 .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
@@ -304,7 +313,7 @@ section{position:relative;overflow:hidden}
 @media print{
   :root{--bg:#fff;--fg:#111;--mut:#555;--line:#ccc;--card:#fff}
   body{background:#fff;color:#111}
-  header,.mm,.lb,.fx,.logos,.glow,.fade,.prog,.skip,.pills,.subs{display:none!important}
+  header,.mm,.lb,.fx,.logos,.glow,.fade,.cfb,.prog,.skip,.pills,.subs{display:none!important}
   .pane,.sp{display:block!important}
   .pane[hidden],.sp[hidden]{display:block!important}
   section{padding:24px 0;break-inside:avoid;overflow:visible}
@@ -746,6 +755,37 @@ function tick(){px+=(tx-px)*.08;py+=(ty-py)*.08;st.style.setProperty('--px',px.t
   pr=(Math.abs(tx-px)>.002||Math.abs(ty-py)>.002)?requestAnimationFrame(tick):0}
 st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2;if(!pr)pr=requestAnimationFrame(tick)});
 st.addEventListener('pointerleave',function(){tx=ty=0;if(!pr)pr=requestAnimationFrame(tick)});
+})();
+(function(){
+// Photo wall coverflow. Each row is still a plain scroll-snap strip; this only adds
+// the look: the card nearest the middle is large and sharp, the cards either side
+// angle away, shrink and fade, and the row snaps with a card in the centre. Click
+// arrows (mouse users) step one card. Reduced motion keeps the plain strips.
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+document.querySelectorAll('.pr').forEach(function(pr){
+  var tr=pr.querySelector('.tr'),cards=[].slice.call(pr.querySelectorAll('.pc'));
+  if(!tr||cards.length<2)return;
+  pr.classList.add('cf');
+  var wrap=document.createElement('div');wrap.className='prw';pr.parentNode.insertBefore(wrap,pr);wrap.appendChild(pr);
+  var raf=0;
+  function pad(){var w=pr.clientWidth;if(!w)return;
+    tr.style.paddingLeft=Math.max(24,(w-cards[0].offsetWidth)/2)+'px';
+    tr.style.paddingRight=Math.max(24,(w-cards[cards.length-1].offsetWidth)/2-16)+'px'}
+  function apply(){raf=0;var r=pr.getBoundingClientRect();if(!r.width)return;var mid=r.left+r.width/2,span=r.width*.42;
+    for(var i=0;i<cards.length;i++){var c=cards[i],b=c.getBoundingClientRect(),d=(b.left+b.width/2-mid)/span,ad=Math.min(1,Math.abs(d));
+      c.style.transform='perspective(1100px) rotateY('+(-Math.max(-1,Math.min(1,d))*26).toFixed(1)+'deg) scale('+(Math.min(1.05,(r.width-32)/c.offsetWidth)*(1-.24*ad)).toFixed(3)+')';
+      c.style.opacity=(1-.55*ad).toFixed(2);c.style.zIndex=Math.round(100-ad*100)}}
+  function queue(){if(!raf)raf=requestAnimationFrame(apply)}
+  pr.addEventListener('scroll',queue,{passive:true});
+  if('ResizeObserver' in window){new ResizeObserver(function(){pad();queue()}).observe(pr)}else{addEventListener('resize',function(){pad();queue()})}
+  pad();apply();
+  function step(dir){var r=pr.getBoundingClientRect(),mid=r.left+r.width/2,best=null,bd=1e9;
+    cards.forEach(function(c){var b=c.getBoundingClientRect(),off=(b.left+b.width/2-mid)*dir;if(off>12&&off<bd){bd=off;best=c}});
+    if(best){var b=best.getBoundingClientRect();pr.scrollBy({left:b.left+b.width/2-mid,behavior:'smooth'})}}
+  [['l','‹','Previous photo',-1],['r','›','Next photo',1]].forEach(function(x){
+    var btn=document.createElement('button');btn.type='button';btn.className='cfb '+x[0];btn.textContent=x[1];btn.setAttribute('aria-label',x[2]);
+    btn.addEventListener('click',function(){step(x[3])});wrap.appendChild(btn)});
+});
 })();
 </script>
 </body>
