@@ -207,23 +207,38 @@ manual step left is the push itself.
 
 ## Palette
 
-Buttermilk ground with midnight blue.
+Ink ground, warm bone text, one vermilion accent.
 
-| Token | Value | Role |
-|---|---|---|
-| `--bg` | `#FFF2BA` | buttermilk page |
-| `--fg` | `#1B4E7D` | lifted navy — body text |
-| `--acc` / `--fill` | `#0F3C65` | midnight blue — headings, figures, fills |
-| `--fill-ink` | `#FFF2BA` | buttermilk text on a navy fill |
-| `--card` | `#FFF8D8` | cards, tiles, chips |
+| Token | Value | Role | Contrast |
+|---|---|---|---|
+| `--bg` | `#0E0F12` | near-black, slightly cool | |
+| `--fg` | `#F2EFE8` | warm off-white text | 16.7:1 |
+| `--mut` | `rgba(242,239,232,.68)` | secondary text | 8.0:1 |
+| `--acc` / `--fill` | `#FF5A2B` | vermilion | 6.2:1 |
+| `--fill-ink` | `#0E0F12` | text on a vermilion fill | 6.2:1 |
+| `--card` | `#15171C` | cards, tiles, chips | |
 
-Body copy sits a shade lighter than the full `#0F3C65`, so the accent still
-reads as emphasis in a two-colour system. Fills invert the pair: navy block,
-buttermilk text. Lowest measured text contrast is 5.29:1, headings 10.06:1.
+Every text style on the live page was measured after the change; nothing is
+under 6.16:1, so all of it clears WCAG AA, and body text clears AAA.
 
-The hero portrait caption is pinned to light values rather than tokens,
-because it sits on the photo gradient rather than on the page and would
-otherwise turn navy-on-dark when the palette points this way.
+**Where the accent goes.** Figures, dates, buttons, active states, the case-study
+labels and the "Production" emphasis in the hero. Section headings, the surname
+and the capability titles are bone: six 72px vermilion headings would break the
+rule of keeping the accent to under a tenth of the page. To bring the surname or
+headings back to the accent, change `color:var(--fg)` to `color:var(--acc)` on
+`h2` and `h1 span`.
+
+**Logos.** On a dark ground the default treatment is greyscale plus invert,
+which lifts dark and coloured marks to light. Marks that are already light
+(Shein, Sunburn, Samsung, Perfora, Fastrack, Under25) carry an `inv` class and
+are only greyscaled. Spade, Raftaar and the Eco-Factory seal are tagged `inv`
+too: they have light lettering that the invert step turned dark and unreadable.
+Hover brightens rather than restoring true colour, since the dark logos would
+vanish.
+
+**Pinned colours.** The hero portrait caption and the lightbox controls sit on
+photos rather than on the page, so they use fixed light values instead of the
+tokens.
 
 ### Photo wall
 
@@ -234,9 +249,10 @@ lightbox caption and screen readers still work.
 
 ### Earlier palettes
 
-Each is one commit, recoverable with `git revert <commit>`: midnight blue on
-buttermilk (current), buttermilk on midnight blue, green-black and pista,
-off-white and pista, and black and gold before those.
+Each is one commit, recoverable with `git revert <commit>`. In order: black and
+gold, off-white and pista, green-black and pista, buttermilk on midnight blue,
+midnight blue on buttermilk, and now ink and vermilion. Run `git log --oneline`
+to find them.
 
 ## Photo curation (round 5)
 
