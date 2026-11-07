@@ -321,3 +321,7 @@ The introduction is a split hero: name, role, intro and two buttons in one left-
 ## Photo wall prints (round 8)
 
 Photo wall items are styled as white-bordered prints. Each row keeps its plain scroll-snap markup; the tilt and offset come from five CSS patterns (`.set .pc:nth-child(5n+N)`), so adding photos needs no extra work. Hovering straightens and lifts a print, clicking anywhere on it opens the lightbox, and the first time a row scrolls into view its prints drop into place one after another. With `prefers-reduced-motion` the drop-in is skipped and the prints simply sit tilted. The paper colour is `#EDEAE2` on `.pc`.
+
+### Looping rows
+
+Each photo wall row drifts slowly from left to right and repeats (`SPEED` in the "Photo wall loop" script, 30 pixels per second). To make the seam invisible the row's photos are repeated enough times to fill the screen; those copies are hidden from screen readers and from the lightbox list, and a video's copy shows its poster frame. The loop pauses on hover or keyboard focus and while the row is off-screen. With `prefers-reduced-motion` the rows stay as ordinary swipeable strips.

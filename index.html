@@ -229,6 +229,10 @@ body{overflow-x:hidden}
 .pr.pre .pc{opacity:0}
 .pr.in .pc{animation:drop .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 80ms)}
 @keyframes drop{from{opacity:0;transform:translateY(54px) rotate(calc(var(--r) * 3.5)) scale(.94)}}
+.pr.loop{overflow:hidden;scroll-snap-type:none}
+.pr.loop .tr{padding:0;animation:lp 60s linear infinite;will-change:transform}
+.pr.loop:hover .tr,.pr.loop:focus-within .tr,.pr.off .tr{animation-play-state:paused}
+@keyframes lp{from{transform:translateX(calc(var(--lw,1000px) * -1))}to{transform:translateX(0)}}
 @media(max-width:700px){.pc{--h:210px;padding:7px 7px 22px}.pc.big{--h:250px}.set{gap:16px;padding-right:16px}.pr{padding:26px 0 22px}}
 .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 20px) 14px calc(env(safe-area-inset-bottom,0px) + 20px)}
 .lb.open{display:flex;animation:in .3s ease}
@@ -763,6 +767,32 @@ if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserve
 var rows=document.querySelectorAll('.pr');
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
 rows.forEach(function(r){[].forEach.call(r.querySelectorAll('.pc'),function(c,i){c.style.setProperty('--i',Math.min(i,9))});r.classList.add('pre');io.observe(r)});
+})();
+(function(){
+// Photo wall loop: each row drifts slowly from left to right and repeats. To make the
+// seam invisible the row's photos are repeated enough times to fill the screen; the
+// extra copies are hidden from screen readers and from the lightbox's photo list.
+// The motion pauses on hover or focus and while the row is off-screen. With reduced
+// motion the rows stay as ordinary swipeable strips.
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var SPEED=30; // pixels per second
+document.querySelectorAll('.pr').forEach(function(pr){
+  var tr=pr.querySelector('.tr'),set=tr&&tr.querySelector('.set');if(!set)return;
+  pr.classList.add('loop');
+  function build(){
+    var w=set.offsetWidth;if(!w)return;
+    tr.querySelectorAll('.set.cp').forEach(function(c){c.remove()});
+    var n=Math.ceil(innerWidth/w);
+    for(var i=0;i<n;i++){
+      var cp=set.cloneNode(true);cp.classList.add('cp');cp.setAttribute('aria-hidden','true');
+      cp.querySelectorAll('video').forEach(function(v){var im=new Image();im.alt='';im.decoding='async';im.src=v.getAttribute('poster')||'';im.style.aspectRatio=v.style.aspectRatio;v.replaceWith(im)});
+      tr.appendChild(cp)}
+    tr.style.setProperty('--lw',w+'px');tr.style.animationDuration=(w/SPEED).toFixed(1)+'s';
+  }
+  if('ResizeObserver' in window){new ResizeObserver(build).observe(pr)}else{addEventListener('resize',build)}
+  build();
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){pr.classList.toggle('off',!e.isIntersecting)})}).observe(pr)}
+});
 })();
 </script>
 </body>
