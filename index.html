@@ -208,28 +208,28 @@ body{overflow-x:hidden}
 .bandimg{position:relative;height:clamp(300px,62vh,660px);overflow:hidden;margin:0}
 .bandimg img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;filter:brightness(.85);will-change:transform}
 .pw{width:100vw;margin-left:calc(50% - 50vw);margin-top:10px}
-.pr{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-padding-inline:max(24px,calc(50vw - 516px));-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:12px 0 10px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.pr{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-padding-inline:max(24px,calc(50vw - 516px));-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:30px 0 28px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .tr{display:flex;width:max-content;padding:0 max(24px,calc(50vw - 516px))}
 .pr::-webkit-scrollbar{display:none}
 .pc{scroll-snap-align:start}
-.set{display:flex;align-items:flex-start;gap:16px;padding-right:16px}
-.pc{--h:300px;position:relative;flex:none;margin:0;padding:0;border-radius:4px;overflow:hidden;
-    background:#15171C;border:1px solid var(--line);cursor:zoom-in;
-    transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s,box-shadow .45s}
+.set{display:flex;align-items:flex-start;gap:22px;padding-right:22px}
+.pc{--h:300px;--r:0deg;--y:0px;position:relative;flex:none;margin:0;padding:9px 9px 30px;border-radius:2px;overflow:hidden;
+    background:#EDEAE2;cursor:zoom-in;transform:translateY(var(--y)) rotate(var(--r));
+    box-shadow:0 6px 16px rgba(0,0,0,.4),0 1px 2px rgba(0,0,0,.5);
+    transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
 .pc.big{--h:360px}
-.pc img,.pc video{display:block;height:var(--h);width:auto;vertical-align:bottom;background:#15171C}
+.pc img,.pc video{display:block;height:var(--h);width:auto;vertical-align:bottom;background:#D9D5CA}
 .pc video{cursor:default}
-.pc:hover{transform:translateY(-6px);border-color:rgba(255,90,43,.55);box-shadow:0 22px 44px rgba(0,0,0,.55)}
-.prw{position:relative}
-.pr.cf{scroll-snap-type:x proximity;scroll-padding-inline:0;padding:32px 0 28px}
-.pr.cf .pc{scroll-snap-align:center;will-change:transform;transform-origin:50% 50%;transition:border-color .45s,box-shadow .45s}
-.pr.cf .pc:hover{transform:none}
-.cfb{position:absolute;top:50%;z-index:200;width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1px solid var(--line);background:rgba(21,23,28,.88);color:var(--fg);font:400 18px/1 Inter,sans-serif;cursor:pointer;opacity:0;transition:opacity .3s,border-color .3s,background .3s}
-.cfb.l{left:max(12px,calc(50vw - 560px))}.cfb.r{right:max(12px,calc(50vw - 560px))}
-.prw:hover .cfb,.cfb:focus-visible{opacity:1}
-.cfb:hover{border-color:var(--acc);background:#15171C}
-@media(hover:none){.cfb{display:none}}
-@media(max-width:700px){.pr.cf{padding:30px 0 24px}.pc{--h:210px}.pc.big{--h:250px}.set{gap:10px;padding-right:10px}.pr{padding:26px 0 20px}}
+.set .pc:nth-child(5n+1){--r:-3deg;--y:6px}
+.set .pc:nth-child(5n+2){--r:2deg;--y:-4px}
+.set .pc:nth-child(5n+3){--r:-1.5deg;--y:10px}
+.set .pc:nth-child(5n+4){--r:3.2deg;--y:-2px}
+.set .pc:nth-child(5n+5){--r:-2.4deg;--y:4px}
+.pc:hover{--r:0deg;--y:-12px;transform:translateY(-12px) scale(1.05);z-index:5;box-shadow:0 26px 46px rgba(0,0,0,.6),0 2px 4px rgba(0,0,0,.5)}
+.pr.pre .pc{opacity:0}
+.pr.in .pc{animation:drop .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 80ms)}
+@keyframes drop{from{opacity:0;transform:translateY(54px) rotate(calc(var(--r) * 3.5)) scale(.94)}}
+@media(max-width:700px){.pc{--h:210px;padding:7px 7px 22px}.pc.big{--h:250px}.set{gap:16px;padding-right:16px}.pr{padding:26px 0 22px}}
 .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 20px) 14px calc(env(safe-area-inset-bottom,0px) + 20px)}
 .lb.open{display:flex;animation:in .3s ease}
 .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
@@ -313,7 +313,7 @@ section{position:relative;overflow:hidden}
 @media print{
   :root{--bg:#fff;--fg:#111;--mut:#555;--line:#ccc;--card:#fff}
   body{background:#fff;color:#111}
-  header,.mm,.lb,.fx,.logos,.glow,.fade,.cfb,.prog,.skip,.pills,.subs{display:none!important}
+  header,.mm,.lb,.fx,.logos,.glow,.fade,.prog,.skip,.pills,.subs{display:none!important}
   .pane,.sp{display:block!important}
   .pane[hidden],.sp[hidden]{display:block!important}
   section{padding:24px 0;break-inside:avoid;overflow:visible}
@@ -681,7 +681,7 @@ function close(){
   lastFocus=null;
 }
 function step(d){k=(k+d+list.length)%list.length;show()}
-document.addEventListener('click',function(e){var im=e.target.closest('img[data-lb]');if(im&&!lb.contains(im))open(im)});
+document.addEventListener('click',function(e){var f=e.target.closest('.pc'),im=e.target.closest('img[data-lb]')||(f&&f.querySelector('img[data-lb]'));if(im&&!lb.contains(im))open(im)});
 lb.querySelector('.x').onclick=close;lb.querySelector('.p').onclick=function(){step(-1)};lb.querySelector('.n').onclick=function(){step(1)};
 lb.addEventListener('click',function(e){if(e.target===lb)close()});
 document.addEventListener('keydown',function(e){
@@ -757,35 +757,12 @@ st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();t
 st.addEventListener('pointerleave',function(){tx=ty=0;if(!pr)pr=requestAnimationFrame(tick)});
 })();
 (function(){
-// Photo wall coverflow. Each row is still a plain scroll-snap strip; this only adds
-// the look: the card nearest the middle is large and sharp, the cards either side
-// angle away, shrink and fade, and the row snaps with a card in the centre. Click
-// arrows (mouse users) step one card. Reduced motion keeps the plain strips.
-if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-document.querySelectorAll('.pr').forEach(function(pr){
-  var tr=pr.querySelector('.tr'),cards=[].slice.call(pr.querySelectorAll('.pc'));
-  if(!tr||cards.length<2)return;
-  pr.classList.add('cf');
-  var wrap=document.createElement('div');wrap.className='prw';pr.parentNode.insertBefore(wrap,pr);wrap.appendChild(pr);
-  var raf=0;
-  function pad(){var w=pr.clientWidth;if(!w)return;
-    tr.style.paddingLeft=Math.max(24,(w-cards[0].offsetWidth)/2)+'px';
-    tr.style.paddingRight=Math.max(24,(w-cards[cards.length-1].offsetWidth)/2-16)+'px'}
-  function apply(){raf=0;var r=pr.getBoundingClientRect();if(!r.width)return;var mid=r.left+r.width/2,span=r.width*.42;
-    for(var i=0;i<cards.length;i++){var c=cards[i],b=c.getBoundingClientRect(),d=(b.left+b.width/2-mid)/span,ad=Math.min(1,Math.abs(d));
-      c.style.transform='perspective(1100px) rotateY('+(-Math.max(-1,Math.min(1,d))*26).toFixed(1)+'deg) scale('+(Math.min(1.05,(r.width-32)/c.offsetWidth)*(1-.24*ad)).toFixed(3)+')';
-      c.style.opacity=(1-.55*ad).toFixed(2);c.style.zIndex=Math.round(100-ad*100)}}
-  function queue(){if(!raf)raf=requestAnimationFrame(apply)}
-  pr.addEventListener('scroll',queue,{passive:true});
-  if('ResizeObserver' in window){new ResizeObserver(function(){pad();queue()}).observe(pr)}else{addEventListener('resize',function(){pad();queue()})}
-  pad();apply();
-  function step(dir){var r=pr.getBoundingClientRect(),mid=r.left+r.width/2,best=null,bd=1e9;
-    cards.forEach(function(c){var b=c.getBoundingClientRect(),off=(b.left+b.width/2-mid)*dir;if(off>12&&off<bd){bd=off;best=c}});
-    if(best){var b=best.getBoundingClientRect();pr.scrollBy({left:b.left+b.width/2-mid,behavior:'smooth'})}}
-  [['l','‹','Previous photo',-1],['r','›','Next photo',1]].forEach(function(x){
-    var btn=document.createElement('button');btn.type='button';btn.className='cfb '+x[0];btn.textContent=x[1];btn.setAttribute('aria-label',x[2]);
-    btn.addEventListener('click',function(){step(x[3])});wrap.appendChild(btn)});
-});
+// Photo wall prints: each row's prints drop into place, staggered, the first time
+// the row scrolls into view. Without JS, or with reduced motion, they just sit there.
+if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window))return;
+var rows=document.querySelectorAll('.pr');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
+rows.forEach(function(r){[].forEach.call(r.querySelectorAll('.pc'),function(c,i){c.style.setProperty('--i',Math.min(i,9))});r.classList.add('pre');io.observe(r)});
 })();
 </script>
 </body>
