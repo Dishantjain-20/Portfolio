@@ -310,13 +310,12 @@ content column. Captions are off the wall cards; each image keeps descriptive
 
 ## Hero (round 6)
 
-The introduction is a layered stage: client logo cards orbit slowly behind a cut-out portrait, with the name sitting between the two layers.
+The introduction is a split hero: name, role, intro and two buttons in one left-aligned column on the page grid, with the cut-out portrait and orbiting client logos on the right. Below 900px the text stacks above the portrait.
 
 - `assets/dishant-cutout.png` is the transparent portrait (the 3D-style render, background removed with Vision's foreground mask). To change it, overwrite that file; keep the width/height attributes on `.cut` in step with the new size.
 - 15 logo cards travel clockwise round an ellipse, one lap about every 100 seconds (`LAP` in the hero script). Cards at the back are smaller and dimmer, cards at the front larger. Mobile hides the cards marked `nm` so the ring stays uncluttered.
 - Logos keep their own colours. The ones that are white-only artwork (Shein, Samsung, Sunburn, Fastrack, Perfora, Under25, Spade) sit on a coloured card; the card colour is the `--cb` variable on each `.fl`. Those card colours are decorative picks, not official brand specs, so change them freely.
 - On desktop the whole ring drifts slightly with the mouse. Under `prefers-reduced-motion` the cards are placed once and do not move; the animation also pauses when the hero is off-screen or the tab is hidden.
-- Up to 900px the intro copy drops below the stage.
 - The scrolling "Brands I've worked with" strip was removed; the full logo wall is still under Work → Brands.
 
 ## Space backdrop (round 7)
