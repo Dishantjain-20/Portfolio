@@ -141,17 +141,6 @@ h1 span{color:var(--fg)}
 .contact > a{display:block;color:var(--fg);text-decoration:none;font-weight:800;font-size:clamp(24px,5vw,58px);line-height:1.2;overflow-wrap:anywhere}
 .contact a:hover{color:var(--acc)}
 footer{padding:30px 0;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
-.mq{overflow:hidden;margin-bottom:8px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.mq .track{display:flex;width:max-content;align-items:center;animation:mq 90s linear infinite}
-.mq:hover .track{animation-play-state:paused}
-.mq .mi{flex:none;padding:0 34px;height:64px;display:flex;align-items:center}
-.mq .lg{position:relative;max-width:none}
-.mq .lg img{display:block;width:100%;height:auto;filter:grayscale(1) invert(1) opacity(.55);transition:filter .4s,opacity .4s}
-.mq .lg.inv img{filter:grayscale(1) opacity(.55)}
-.mq .mi:hover .lg img{filter:grayscale(1) invert(1);opacity:1}
-.mq .mi:hover .lg.inv img{filter:none;opacity:1}
-@keyframes mq{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@media(prefers-reduced-motion:reduce){.mq .track{animation:none}}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(14,15,18,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;gap:28px;height:60px}
 .logo{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none}
@@ -191,7 +180,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rg
 @media(max-width:860px){.mapbox{grid-template-columns:1fr;gap:28px}.map{max-width:520px;margin:0 auto}}
 body{overflow-x:hidden}
 #top{overflow-x:clip}
-@media(max-width:700px){.map .cl{font-size:16px}section{padding:64px 0}h2{margin-bottom:28px}.wall{grid-template-columns:repeat(auto-fill,minmax(138px,1fr))}.tile{height:108px;padding:12px}.mq .mi{padding:0 20px}.hp{aspect-ratio:4/3}.card{padding:20px 16px}.pills button,.subs button{padding:8px 14px}}
+@media(max-width:700px){.map .cl{font-size:16px}section{padding:64px 0}h2{margin-bottom:28px}.wall{grid-template-columns:repeat(auto-fill,minmax(138px,1fr))}.tile{height:108px;padding:12px}.hp{aspect-ratio:4/3}.card{padding:20px 16px}.pills button,.subs button{padding:8px 14px}}
 @media(max-width:860px){.strip{grid-template-columns:repeat(3,1fr)}.strip div:nth-child(4){grid-column:span 2}}
 @media(max-width:560px){.strip{grid-template-columns:1fr 1fr}.strip div:nth-child(4){grid-column:auto}.strip div:last-child{grid-column:span 2}}
 @media(max-width:480px){.bar{grid-template-columns:96px 1fr 36px;gap:10px;font-size:13px}.spot{padding:20px}.wrap{padding:0 20px}.logo span{letter-spacing:.14em}}
@@ -282,24 +271,22 @@ section{position:relative;overflow:hidden}
 .stage{position:relative;overflow:hidden;isolation:isolate;padding:0;border-top:0}
 .scene{position:relative;height:clamp(600px,calc(100vh - 60px),800px)}
 .glow{position:absolute;left:50%;bottom:-20%;width:min(980px,96%);height:74%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,90,43,.45),rgba(255,90,43,.16) 55%,transparent 78%);filter:blur(8px);pointer-events:none}
-.logos{position:absolute;inset:0;pointer-events:none}
-.fl{position:absolute;left:var(--x);top:var(--y);width:var(--w);transform:translate3d(calc(var(--px,0) * var(--k) * 1px),calc(var(--py,0) * var(--k) * .6px),0);will-change:transform}
-.fl.d2{opacity:.82;filter:blur(.3px)}
-.fl.d3{opacity:.5;filter:blur(1.2px)}
-.lc{aspect-ratio:1.7;display:grid;place-items:center;border-radius:12px;background:linear-gradient(150deg,rgba(34,37,45,.88),rgba(18,20,25,.88));border:1px solid rgba(242,239,232,.16);box-shadow:0 22px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(242,239,232,.1);animation:flt var(--dur,10s) ease-in-out var(--del,0s) infinite alternate;transform:rotate(var(--r,0deg))}
-.lc img{display:block;max-width:76%;max-height:58%;width:auto;height:auto;object-fit:contain;filter:grayscale(1) invert(1) opacity(.92)}
-.lc img.inv{filter:grayscale(1) opacity(.92)}
-@keyframes flt{from{transform:translateY(0) rotate(var(--r,0deg))}to{transform:translateY(-14px) rotate(calc(var(--r,0deg) + 1.6deg))}}
-.intro-head{position:absolute;left:0;right:0;top:13.5%;text-align:center;z-index:2}
+.logos{position:absolute;inset:0;pointer-events:none;transform:translate3d(calc(var(--px,0) * 14px),calc(var(--py,0) * 8px),0)}
+.fl{position:absolute;left:0;top:0;width:var(--w);will-change:transform,opacity}
+.lc{aspect-ratio:1.7;display:grid;place-items:center;border-radius:12px;background:var(--cb,#fff);border:1px solid rgba(242,239,232,.2);box-shadow:0 18px 40px rgba(0,0,0,.5);animation:flt var(--dur,10s) ease-in-out var(--del,0s) infinite alternate}
+.lc img{display:block;max-width:76%;max-height:58%;width:auto;height:auto;object-fit:contain}
+@keyframes flt{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+.intro-head{position:absolute;left:0;right:0;top:8%;text-align:center;z-index:2}
 .intro-head .kick{margin-bottom:14px}
 .br{display:none}
-.cut{position:absolute;left:50%;bottom:0;height:min(76%,600px);width:auto;transform:translateX(-50%);z-index:3;filter:drop-shadow(0 18px 36px rgba(0,0,0,.5));pointer-events:none;user-select:none}
-.fade{position:absolute;left:0;right:0;bottom:0;height:20%;background:linear-gradient(transparent,var(--bg));z-index:4;pointer-events:none}
+.cut{position:absolute;left:50%;bottom:6%;height:min(68%,560px);width:auto;transform:translateX(-50%);z-index:3;filter:drop-shadow(0 18px 36px rgba(0,0,0,.5));pointer-events:none;user-select:none;animation:hov 8s ease-in-out infinite alternate}
+@keyframes hov{from{transform:translate(-50%,0)}to{transform:translate(-50%,-10px)}}
+.fade{position:absolute;left:0;right:0;bottom:0;height:12%;background:linear-gradient(transparent,var(--bg));z-index:4;pointer-events:none}
 .hero-copy{position:absolute;left:0;right:0;bottom:8%;z-index:5;pointer-events:none}
 .hero-copy-in{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
 .hero-copy .role{margin:0;max-width:min(290px,calc(50vw - 240px));font-size:clamp(22px,2.1vw,28px);line-height:1.2}
 .hero-copy .intro{margin:0;max-width:min(290px,calc(50vw - 240px));font-size:15px;text-align:right}
-.stage.paused .lc{animation-play-state:paused}
+.stage.paused .lc,.stage.paused .cut{animation-play-state:paused}
 @media(max-width:900px){
   .scene{height:clamp(520px,78vh,640px)}
   .fl{width:calc(var(--w) * .8)}
@@ -313,16 +300,16 @@ section{position:relative;overflow:hidden}
   .br{display:inline}
   .intro-head{top:6%}
   .fl{width:calc(var(--w) * .55)}.fl.nm{display:none}
-  .cut{height:64%}
+  .cut{height:66%;bottom:5%}
   .hero-copy{position:static;pointer-events:auto;padding:6px 0 10px}
   .hero-copy-in{flex-direction:column;align-items:flex-start;gap:12px}
   .hero-copy .role,.hero-copy .intro{max-width:none;text-align:left}
 }
-@media(prefers-reduced-motion:reduce){.lc{animation:none}.fl{transform:none}}
+@media(prefers-reduced-motion:reduce){.lc,.cut{animation:none}}
 @media print{
   :root{--bg:#fff;--fg:#111;--mut:#555;--line:#ccc;--card:#fff}
   body{background:#fff;color:#111}
-  header,.mm,.lb,.fx,.logos,.glow,.fade,.mq,.prog,.skip,.pills,.subs{display:none!important}
+  header,.mm,.lb,.fx,.logos,.glow,.fade,.prog,.skip,.pills,.subs{display:none!important}
   .pane,.sp{display:block!important}
   .pane[hidden],.sp[hidden]{display:block!important}
   section{padding:24px 0;break-inside:avoid;overflow:visible}
@@ -346,27 +333,27 @@ section{position:relative;overflow:hidden}
   <div class="scene">
     <div class="glow" aria-hidden="true"></div>
     <div class="logos" aria-hidden="true">
-      <div class="fl d2" style="--x:5%;--y:13%;--w:140px;--k:16;--r:-4deg;--dur:11s;--del:-3s"><div class="lc"><img class="inv" src="assets/shein.webp" width="380" height="95" alt="" decoding="async"></div></div>
-      <div class="fl d3" style="--x:21%;--y:7%;--w:118px;--k:24;--r:3deg;--dur:13s;--del:-6s"><div class="lc"><img src="assets/suhana.webp" width="380" height="187" alt="" decoding="async"></div></div>
-      <div class="fl d3 nm" style="--x:38%;--y:3%;--w:92px;--k:24;--r:-2deg;--dur:12s;--del:-1s"><div class="lc"><img src="assets/nh7-weekender.webp" width="241" height="190" alt="" decoding="async"></div></div>
-      <div class="fl d3 nm" style="--x:57%;--y:4%;--w:96px;--k:24;--r:2deg;--dur:14s;--del:-8s"><div class="lc"><img class="inv" src="assets/raftaar.webp" width="196" height="190" alt="" decoding="async"></div></div>
-      <div class="fl d2" style="--x:73%;--y:8%;--w:132px;--k:16;--r:4deg;--dur:10s;--del:-5s"><div class="lc"><img class="inv" src="assets/sunburn.svg" width="1305" height="320" alt="" decoding="async"></div></div>
-      <div class="fl d3" style="--x:88%;--y:15%;--w:118px;--k:24;--r:-3deg;--dur:15s;--del:-2s"><div class="lc"><img class="inv" src="assets/samsung.webp" width="302" height="53" alt="" decoding="async"></div></div>
-      <div class="fl d1" style="--x:2%;--y:34%;--w:128px;--k:10;--r:-5deg;--dur:9s;--del:-4s"><div class="lc"><img src="assets/motoranger.webp" width="190" height="190" alt="" decoding="async"></div></div>
-      <div class="fl d2 nm" style="--x:16%;--y:29%;--w:116px;--k:16;--r:3deg;--dur:12s;--del:-7s"><div class="lc"><img class="inv" src="assets/spade-comedy-club.webp" width="304" height="112" alt="" decoding="async"></div></div>
-      <div class="fl d2" style="--x:80%;--y:31%;--w:140px;--k:16;--r:-2deg;--dur:11s;--del:-9s"><div class="lc"><img src="assets/philips.webp" width="380" height="90" alt="" decoding="async"></div></div>
-      <div class="fl d1 nm" style="--x:89%;--y:41%;--w:112px;--k:10;--r:4deg;--dur:9s;--del:-3s"><div class="lc"><img class="inv" src="assets/fastrack.webp" width="380" height="79" alt="" decoding="async"></div></div>
-      <div class="fl d1" style="--x:23%;--y:46%;--w:126px;--k:10;--r:-3deg;--dur:10s;--del:-6s"><div class="lc"><img class="inv" src="assets/perfora.webp" width="380" height="113" alt="" decoding="async"></div></div>
-      <div class="fl d1" style="--x:69%;--y:45%;--w:126px;--k:10;--r:4deg;--dur:9s;--del:-1s"><div class="lc"><img class="inv" src="assets/under25-4.webp" width="195" height="190" alt="" decoding="async"></div></div>
-      <div class="fl d2 nm" style="--x:9%;--y:54%;--w:118px;--k:16;--r:-2deg;--dur:13s;--del:-10s"><div class="lc"><img src="assets/zerodha.webp" width="296" height="43" alt="" decoding="async"></div></div>
-      <div class="fl d2 nm" style="--x:77%;--y:53%;--w:118px;--k:16;--r:-4deg;--dur:12s;--del:-4s"><div class="lc"><img src="assets/bingo-comedy-adda.webp" width="143" height="116" alt="" decoding="async"></div></div>
-      <div class="fl d3 nm" style="--x:30%;--y:38%;--w:92px;--k:24;--r:5deg;--dur:14s;--del:-5s"><div class="lc"><img class="inv" src="assets/eco-factory-foundation.webp" width="229" height="190" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:140px;--cb:#0B0B0B;--dur:9.0s;--del:-0.0s"><div class="lc"><img src="assets/shein.webp" width="380" height="95" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:118px;--cb:#FFFFFF;--dur:10.5s;--del:-1.7s"><div class="lc"><img src="assets/suhana.webp" width="380" height="187" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:132px;--cb:#F26A21;--dur:15.0s;--del:-6.8s"><div class="lc"><img src="assets/sunburn.svg" width="1305" height="320" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:120px;--cb:#FFFFFF;--dur:10.5s;--del:-1.2s"><div class="lc"><img src="assets/motoranger.webp" width="190" height="190" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:96px;--cb:#F5F0E1;--dur:12.0s;--del:-3.4s"><div class="lc"><img src="assets/nh7-weekender.webp" width="241" height="190" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:124px;--cb:#1428A0;--dur:9.0s;--del:-8.5s"><div class="lc"><img src="assets/samsung.webp" width="302" height="53" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:140px;--cb:#FFFFFF;--dur:13.5s;--del:-4.6s"><div class="lc"><img src="assets/philips.webp" width="380" height="90" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:100px;--cb:#16181D;--dur:13.5s;--del:-5.1s"><div class="lc"><img src="assets/raftaar.webp" width="196" height="190" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:126px;--cb:#B5304F;--dur:9.0s;--del:-8.0s"><div class="lc"><img src="assets/perfora.webp" width="380" height="113" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:124px;--cb:#FFFFFF;--dur:12.0s;--del:-2.4s"><div class="lc"><img src="assets/zerodha.webp" width="296" height="43" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:122px;--cb:#2B9FD8;--dur:12.0s;--del:-2.9s"><div class="lc"><img src="assets/spade-comedy-club.webp" width="304" height="112" alt="" decoding="async"></div></div>
+      <div class="fl" style="--w:118px;--cb:#5B3CC4;--dur:10.5s;--del:-0.7s"><div class="lc"><img src="assets/under25-4.webp" width="195" height="190" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:112px;--cb:#FFF4DC;--dur:13.5s;--del:-4.1s"><div class="lc"><img src="assets/bingo-comedy-adda.webp" width="143" height="116" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:116px;--cb:#1C1C1C;--dur:15.0s;--del:-6.3s"><div class="lc"><img src="assets/fastrack.webp" width="380" height="79" alt="" decoding="async"></div></div>
+      <div class="fl nm" style="--w:100px;--cb:#F1F8EC;--dur:15.0s;--del:-5.8s"><div class="lc"><img src="assets/eco-factory-foundation.webp" width="229" height="190" alt="" decoding="async"></div></div>
     </div>
     <div class="intro-head"><div class="wrap">
       <div class="kick">Portfolio · Pune, India</div>
       <h1>Dishant <br class="br">Jain</h1>
     </div></div>
-    <img class="cut" src="assets/dishant-cutout.png" width="371" height="510" fetchpriority="high" decoding="async" alt="Dishant Jain">
+    <img class="cut" src="assets/dishant-cutout.png" width="617" height="900" fetchpriority="high" decoding="async" alt="Dishant Jain">
     <div class="fade" aria-hidden="true"></div>
   </div>
   <div class="hero-copy"><div class="wrap hero-copy-in">
@@ -381,8 +368,6 @@ section{position:relative;overflow:hidden}
   <div><b>₹1.5Cr+</b><small>Largest budget · ~$180K</small></div>
   <div><b>9</b><small>Cities</small></div>
 </div></div>
-<div class="wrap"><div class="kick" style="margin-bottom:18px">Brands I’ve worked with</div></div>
-<div class="mq" role="group" aria-label="Brands worked with"><div class="track" id="mqt"></div></div>
 <div class="wrap" style="padding-bottom:90px"><figure class="hp"><img fetchpriority="high" decoding="async" src="assets/live-show-1200.jpg" srcset="assets/live-show-1200.jpg 1200w, assets/live-show-2200.jpg 2200w" sizes="(max-width:1100px) 100vw, 1032px" width="1200" height="675" alt="Main stage and crowd at a live show"><figcaption>Live show &middot; main stage</figcaption></figure></div>
 
 <section id="numbers"><div class="wrap rv">
@@ -649,20 +634,6 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 els.forEach(function(e){io.observe(e)});
 })();
 
-(function(){var tr=document.getElementById('mqt');if(!tr)return;
-var set=document.createDocumentFragment();
-document.querySelectorAll('.wall .tile .lg').forEach(function(lg){
-  var c=lg.cloneNode(true);
-  c.className='lg'+(lg.classList.contains('inv')?' inv':'');
-  c.style.width=Math.round(parseInt(lg.style.width,10)*.78)+'px';
-  var mi=document.createElement('div');mi.className='mi';mi.appendChild(c);set.appendChild(mi)});
-// the marquee needs two copies to loop; only the first is announced
-var dup=document.createElement('div');
-dup.style.display='contents';dup.setAttribute('aria-hidden','true');
-dup.appendChild(set.cloneNode(true));
-tr.appendChild(set);tr.appendChild(dup);
-})();
-
 (function(){
 var lock='';function setC(n,on){document.querySelectorAll('[data-c="'+n+'"]').forEach(function(e){e.classList.toggle('on',on)});
  var a=document.querySelector('[data-arc="'+n+'"]');if(a)a.classList.toggle('lit',on)}
@@ -747,17 +718,40 @@ var tk=false;function upd(){var vh=innerHeight;fx.forEach(function(d){var r=d.pa
 addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});upd();
 })();
 (function(){
-// Hero parallax: the logo cards shift a little with the pointer, far ones most,
-// while the cut-out stays put as the reference plane. Skipped for reduced
-// motion and for touch, and the float animation pauses when off screen.
+// Hero: the logo cards travel round an ellipse behind the portrait, clockwise and
+// slowly (one lap ~100s). Cards at the back are smaller and dimmer, cards at the
+// front larger, so the ring reads as depth. The pointer nudges the whole ring.
+// Reduced motion: cards are placed once and do not move.
 var st=document.getElementById('stage');if(!st)return;
-if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){st.classList.toggle('paused',!e.isIntersecting)})}).observe(st)}
-if(matchMedia('(prefers-reduced-motion:reduce)').matches||!matchMedia('(hover:hover)').matches)return;
-var tx=0,ty=0,cx=0,cy=0,raf=0;
-function tick(){cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;st.style.setProperty('--px',cx.toFixed(3));st.style.setProperty('--py',cy.toFixed(3));
-  raf=(Math.abs(tx-cx)>.002||Math.abs(ty-cy)>.002)?requestAnimationFrame(tick):0}
-st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2;if(!raf)raf=requestAnimationFrame(tick)});
-st.addEventListener('pointerleave',function(){tx=ty=0;if(!raf)raf=requestAnimationFrame(tick)});
+var scene=st.querySelector('.scene'),cards=[].slice.call(st.querySelectorAll('.fl'));
+var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var live=[],W=0,H=0,t0=performance.now(),raf=0,onscreen=true,LAP=100000;
+function measure(){
+  W=scene.clientWidth;H=scene.clientHeight;
+  live=cards.filter(function(c){return c.offsetParent!==null||getComputedStyle(c).display!=='none'});
+  live.forEach(function(c){c._w=c.offsetWidth;c._h=c._w/1.7});
+}
+function draw(now){
+  var rx=Math.min(W*.46,600),ry=H*.34,cx=W/2,cy=H*.46,base=calm?0:((now-t0)/LAP)*Math.PI*2,n=live.length;
+  for(var i=0;i<n;i++){
+    var c=live[i],a=base+i/n*Math.PI*2,sn=Math.sin(a),d=(sn+1)/2;
+    var s=.8+.22*d,x=cx+rx*Math.cos(a)-c._w/2,y=cy+ry*sn-c._h/2;
+    c.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+s.toFixed(3)+')';
+    c.style.opacity=(.62+.38*d).toFixed(2);
+  }
+}
+function loop(now){draw(now);raf=(onscreen&&!document.hidden&&!calm)?requestAnimationFrame(loop):0}
+function kick(){if(!raf&&!calm)raf=requestAnimationFrame(loop)}
+measure();draw(performance.now());kick();
+addEventListener('resize',function(){measure();draw(performance.now())});
+if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){onscreen=e.isIntersecting;st.classList.toggle('paused',!onscreen);if(onscreen)kick()})}).observe(st)}
+document.addEventListener('visibilitychange',kick);
+if(calm||!matchMedia('(hover:hover)').matches)return;
+var tx=0,ty=0,px=0,py=0,pr=0;
+function tick(){px+=(tx-px)*.08;py+=(ty-py)*.08;st.style.setProperty('--px',px.toFixed(3));st.style.setProperty('--py',py.toFixed(3));
+  pr=(Math.abs(tx-px)>.002||Math.abs(ty-py)>.002)?requestAnimationFrame(tick):0}
+st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2;if(!pr)pr=requestAnimationFrame(tick)});
+st.addEventListener('pointerleave',function(){tx=ty=0;if(!pr)pr=requestAnimationFrame(tick)});
 })();
 </script>
 </body>
