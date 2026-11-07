@@ -328,3 +328,5 @@ A single fixed `<canvas id="sky">` sits behind the whole page and is drawn entir
 - A faint Milky Way band swings across the middle of the page.
 - No planets. Nebula opacity is capped so body text keeps roughly 8:1 contrast and muted text stays above 5:1.
 - Under `prefers-reduced-motion` the stars stay still and only the colours follow the scroll. The canvas is hidden in print, and its loop pauses when the tab is hidden.
+
+Tuning: `AMP` (nebula and band strength) and `STAR` (star brightness) at the top of the sky script control the overall effect; both were halved-ish in round 8 so the portfolio stays the focus. The Map section also has a near-opaque backing (`#map{background:…}`) so its thin lines and labels stay clear.
