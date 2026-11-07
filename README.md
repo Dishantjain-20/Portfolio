@@ -307,3 +307,12 @@ real frames from inside each clip, not the first frame (often a title card).
 The walls no longer loop, so each row scrolls once and lines up with the page's
 content column. Captions are off the wall cards; each image keeps descriptive
 `alt` text, which is also the lightbox caption.
+
+## Hero (round 6)
+
+The introduction is a layered stage: client logo cards float behind a cut-out of Dishant, with the name sitting between the two layers.
+
+- `assets/dishant-cutout.png` is a transparent cut-out (Vision foreground mask, edge-despilled). It is cropped from a 520×650 source, so a higher-resolution, front-facing portrait would make it crisper. Re-cut it and overwrite the same filename; nothing else needs to change.
+- 15 logo cards sit at three depths (`d1` front, `d3` back and blurred). Each card's position, size, tilt and float speed are inline CSS variables on `.fl`; add or remove a card by editing that list in the `.logos` block.
+- On desktop with a mouse the cards drift with the pointer, back layers moving more. This is skipped on touch devices and under `prefers-reduced-motion`, and the float animation pauses while the hero is off-screen.
+- Up to 900px the intro copy drops below the stage; up to 640px the smaller, labelled-only-by-logo cards are hidden.
